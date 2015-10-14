@@ -1,0 +1,40 @@
+氏名：林謙太郎
+学籍番号：05-151025
+
+共通課題 問1
+説明：
+オリジナルのmin-camlからの変更点についてはcompex1.diffにある通りです。
+このうち、新たに実装したのは以下の関数です。
+kNormal.ml
+q           :K正規化を行った結果を出力する関数pを呼ぶための関数です。
+             結果をAlpha.fに投げるため、K正規化を行った結果eを返り値としています。
+p           :K正規化を行った結果を出力する関数本体です。
+             indentの段数と表現を受け取り、表現に応じた出力を行います。
+print_indent:指定された段数分インデントを行います。
+print_args  :与えられた(Id.t * Type.t) listのId.tの内容をスペース区切りで出力します。
+print_args2 :与えられたId.t listのId.tの内容をスペース区切りで出力します。
+
+実行結果：
+LETREC sum
+  x 
+	LET Ti3
+	  INT 0
+		  IF LE
+		    INT 0
+	      LET Ti6
+          LET Ti5
+	          LET Ti4
+	            INT 1
+	              SUB x Ti4
+	            APP sumTi5 
+	          ADD Ti6 x
+	  LET Ti2
+		  LET Ti1
+		    INT 10000
+		      APP sumTi1 
+		    EXTFUNAPP print_int Ti2 
+
+所感・考察：
+LETが大量に並ぶこととなるのはK正規化の結果に依るものと思われます。
+また、OCamlを書いたのが先学期ぶりだったため、Unitの扱いなど忘れていることが多く手間取る部分が多くありました。
+上記の通り可読性が高いとは言いづらい出力結果となってしまったため、機会を見て改良を行えたらと考えています。

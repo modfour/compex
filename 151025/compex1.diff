@@ -1,0 +1,158 @@
+バイナリーファイル my-min-caml/.git/index とmin-caml/.git/index は異なります
+diff -r my-min-caml/.git/logs/HEAD min-caml/.git/logs/HEAD
+1c1
+< 0000000000000000000000000000000000000000 eed4f8cae0abdf5e63f7ba0fc60b7a7d68246a90 Mod4 <musesc.ll@gmail.com> 1444835491 +0900	clone: from https://github.com/esumii/min-caml.git
+---
+> 0000000000000000000000000000000000000000 eed4f8cae0abdf5e63f7ba0fc60b7a7d68246a90 Mod4 <musesc.ll@gmail.com> 1444852012 +0900	clone: from https://github.com/esumii/min-caml.git
+diff -r my-min-caml/.git/logs/refs/heads/master min-caml/.git/logs/refs/heads/master
+1c1
+< 0000000000000000000000000000000000000000 eed4f8cae0abdf5e63f7ba0fc60b7a7d68246a90 Mod4 <musesc.ll@gmail.com> 1444835491 +0900	clone: from https://github.com/esumii/min-caml.git
+---
+> 0000000000000000000000000000000000000000 eed4f8cae0abdf5e63f7ba0fc60b7a7d68246a90 Mod4 <musesc.ll@gmail.com> 1444852012 +0900	clone: from https://github.com/esumii/min-caml.git
+diff -r my-min-caml/.git/logs/refs/remotes/origin/HEAD min-caml/.git/logs/refs/remotes/origin/HEAD
+1c1
+< 0000000000000000000000000000000000000000 eed4f8cae0abdf5e63f7ba0fc60b7a7d68246a90 Mod4 <musesc.ll@gmail.com> 1444835491 +0900	clone: from https://github.com/esumii/min-caml.git
+---
+> 0000000000000000000000000000000000000000 eed4f8cae0abdf5e63f7ba0fc60b7a7d68246a90 Mod4 <musesc.ll@gmail.com> 1444852012 +0900	clone: from https://github.com/esumii/min-caml.git
+diff -r my-min-caml/kNormal.ml min-caml/kNormal.ml
+180,308d179
+< 
+< (* ������� *)
+< let rec print_indent n = 
+<   match n with
+< 	| 0 -> print_string ""
+< 	| _ -> print_string "  ";
+< 	       print_indent (n-1)
+< 
+< let rec print_args l = 
+<   match l with
+< 	| (x,t) :: tl -> print_string x;
+< 	                 print_string " ";
+< 									 print_args tl
+< 	| _           -> print_newline()
+< 
+< let rec print_args2 l = 
+<   match l with
+< 	| hd :: tl -> print_string hd;
+< 	              print_string " ";
+< 								print_args2 tl
+< 	| _        -> print_newline()
+< 
+< let rec q ind e =
+<   match e with
+<   | Unit -> print_endline "Unit "
+< 	| Int(i) -> print_indent ind;
+< 	            print_string "INT ";
+< 							print_int i;
+< 							print_newline()
+< 	| Float(d) -> print_indent ind;
+< 							  print_string "FLOAT ";
+< 							  print_float d;
+< 						  	print_newline()
+< 	| Neg(x) -> print_indent ind;
+< 	            print_string "NEG ";
+< 							print_endline x
+< 	| Add(x, y) -> print_indent ind;
+< 	               print_string "ADD ";
+< 								 print_string x;
+< 								 print_string " ";
+< 								 print_endline y
+< 	| Sub(x, y) -> print_indent ind;
+< 	               print_string "SUB ";
+< 								 print_string x;
+< 								 print_string " ";
+< 								 print_endline y
+< 	| FNeg(x) -> print_indent ind;
+< 	             print_string "FNEG ";
+< 						 	 print_endline x
+< 	| FAdd(x, y) -> print_indent ind;
+< 	                print_string "FADD ";
+< 								  print_string x;
+< 								  print_string " ";
+< 								  print_endline y
+< 	| FSub(x, y) -> print_indent ind;
+< 	                print_string "FSUB ";
+< 								  print_string x;
+< 								  print_string " ";
+< 								  print_endline y
+< 	| FMul(x, y) -> print_indent ind;
+< 	                print_string "FMUL ";
+< 								  print_string x;
+< 								  print_string " ";
+< 								  print_endline y
+< 	| FDiv(x, y) -> print_indent ind;
+< 	                print_string "FDIV ";
+< 								  print_string x;
+< 								  print_string " ";
+< 								  print_endline y
+< 	| IfEq(x, y, e1, e2) -> print_indent ind;
+< 	                        print_endline "IF EQ";
+< 													q (ind+1) e1;
+< 													q (ind+1) e2
+< 	| IfLE(x, y, e1, e2) -> print_indent ind;
+< 	                        print_endline "IF LE";
+< 													q (ind+1) e1;
+< 													q (ind+1) e2
+< 	| Let((x, t), e1, e2) -> print_indent ind;
+< 	                         print_string "LET ";
+< 													 print_endline x;
+< 													 q (ind+1) e1;
+< 													 q (ind+2) e2
+< 	| Var(x) -> print_indent ind;
+< 	            print_string "VAR ";
+< 							print_endline x
+< 	| LetRec({ name = (x, t); args = yts; body = e1 }, e2) -> 
+< 	    print_indent ind;
+< 			print_string "LETREC ";
+< 			print_endline x;
+< 			print_indent (ind+1);
+< 			print_args yts;
+< 			q (ind+1) e1;
+< 			q (ind+2) e2
+< 	| App(x, ys) -> print_indent ind;
+< 	                print_string "APP ";
+< 									print_string x;
+< 									print_args2 ys
+< 	| Tuple(xs) -> print_indent ind;
+< 	               print_string "TUPLE ";
+< 	               print_args2 xs
+< 	| LetTuple(xts, y, e) -> print_indent ind;
+< 	                         print_string "LETTURPLE ";
+<                            print_args xts;
+< 													 print_indent (ind+1);
+< 													 print_endline y;
+< 													 q (ind+2) e
+< 	| Get(x, y) -> print_indent ind;
+< 	               print_string "GET ";
+< 								 print_string x;
+< 								 print_string " ";
+< 								 print_endline y
+< 	| Put(x, y, z) -> print_indent ind;
+< 	                  print_string "PUT ";
+< 								    print_string x;
+< 								    print_string " ";
+< 								    print_string y;
+< 								    print_string " ";
+< 								    print_endline z
+< 	| ExtArray(x) -> print_indent ind;
+< 	                 print_string "EXTARRAY ";
+< 								   print_endline x
+< 	| ExtFunApp(x, ys) -> print_indent ind;
+< 	                      print_string "EXTFUNAPP ";
+< 								        print_string x;
+< 												print_string " ";
+< 												print_args2 ys
+< 
+< let p e = q 0 e;
+<           e
+diff -r my-min-caml/kNormal.mli min-caml/kNormal.mli
+29,30d28
+< 
+< val p : t -> t
+diff -r my-min-caml/main.ml min-caml/main.ml
+20d19
+< 			   (KNormal.p
+23c22
+< 			    (Parser.exp Lexer.token l))))))))))
+---
+> 			    (Parser.exp Lexer.token l)))))))))
